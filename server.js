@@ -54,11 +54,11 @@ app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "home.html"));
 });
 // Create a set of routes for displaying the HTML pages
-app.get("/addNew", function(req, res) {
+app.get("/add", function(req, res) {
     res.sendFile(path.join(__dirname, "add.html"));
 });
 
-app.get("/viewlists", function(req, res) {
+app.get("/view", function(req, res) {
     res.sendFile(path.join(__dirname, "view.html"));
 } );
 
@@ -79,6 +79,7 @@ app.get("/api/customers", function(req, res) {
 });
 
 // Use jQuery to run AJAX calls to GET and POST data from users to the Express server
+
 
 // Starts the server to begin listening
 // =============================================================
