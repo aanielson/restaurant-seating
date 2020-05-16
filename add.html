@@ -36,7 +36,7 @@
             <form role="form">
               <div class="form-group">
                 <label for="reserve-name">Name</label>
-                <input type="text" class="form-control" id="reserve-phone">
+                <input type="text" class="form-control" id="reserve-name">
               </div>
               <div class="form-group">
                 <label for="reserve-phone">Phone Number</label>
@@ -48,7 +48,7 @@
               </div>
               <div class="form-group">
                 <label for="reserve-id">Unique Id</label>
-                <input type="text" class="form-control" id="reserve-unique-id">
+                <input type="number" class="form-control" id="reserve-unique-id">
               </div>
             </form>
             <div class="text-right">
@@ -62,29 +62,26 @@
     </div>
   </div>
 
-  <!-- <script type="text/javascript">
-    $("#search-btn").on("click", function() {
-      var searchedCharacter = $("#character-search").val().trim();
+  <script type="text/javascript">
+    // Question: What does this code do?
+    $("#add-table-btn").on("click", function(event) {
+      event.preventDefault();
+      var newReservation = {
+        name: $("#reserve-name").val().trim(),
+        phone: $("#reserve-phone").val().trim(),
+        email: $("#reserve-email").val().trim(),
+        id: $("#reserve-unique-id").val(),
+      };
 
-      // Using a RegEx Pattern to remove spaces from searchedCharacter
-      // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-      searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
-
-      $.get("/api/characters/" + searchedCharacter, function(data) {
-        console.log(data);
-        if (data) {
-          $("#stats").show();
-          $("#name").text(data.name);
-          $("#role").text(data.role);
-          $("#age").text(data.age);
-          $("#force-points").text(data.forcePoints);
-        } else {
-          $("#name").text(
-            "The force is not strong with this one. Your character was not found.");
-          $("#stats").hide();
+      // Question: What does this code do??
+      //post to the combined array
+      $.post("/api/tables", newReservation)
+        .then(function(data) {
+          console.log("add.html", data);
+          alert("Adding reservation...");
         }
-      });
-    }); -->
+      );
+    });
 
   </script>
 </body>

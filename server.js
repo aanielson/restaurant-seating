@@ -79,6 +79,44 @@ app.get("/api/customers", function(req, res) {
 });
 
 // Use jQuery to run AJAX calls to GET and POST data from users to the Express server
+//Create the logic that handles reservation requests. 
+//Your code should work such that POST requests take in JSON objects,
+//checks if there is any space left, then adds the JSON object to either the reservation array or the waitlist array. 
+if (tables.length < 5) {
+    app.post("/api/tables", function(req, res) {
+        // req.body hosts is equal to the JSON post sent from the user
+        // This works because of our body parsing middleware
+        var newReservation = req.body;
+    
+        // Using a RegEx Pattern to remove spaces from newCharacter
+        // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+        newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
+    
+        console.log(newReservation);
+    
+        tables.push(newReservation);
+    
+        res.json(newReservation);
+    });
+} else {
+    app.post("/api/waitlist", function(req, res) {
+        // req.body hosts is equal to the JSON post sent from the user
+        // This works because of our body parsing middleware
+        var newReservation = req.body;
+    
+        // Using a RegEx Pattern to remove spaces from newCharacter
+        // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+        newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
+    
+        console.log(newReservation);
+    
+        waitlist.push(newReservation);
+    
+        res.json(newReservation);
+    });
+}
+    //Your POST route should also respond to requests with a confirmation (true or false) of whether or not the requestor has a reservation 
+    //(or is on the waiting list).
 
 
 // Starts the server to begin listening
